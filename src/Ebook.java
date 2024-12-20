@@ -1,11 +1,15 @@
-public class Livro {
+public class Ebook extends Livro{
+
     private String nome;
     private String descricao;
     private double valor;
     private String isbn;
     private Autor autor;
-    private boolean impresso;
+    private String waterMark;
 
+    public Ebook(Autor autor) {
+        super(autor);
+    }
 
     public String getNome() {
         return nome;
@@ -39,35 +43,30 @@ public class Livro {
         this.isbn = isbn;
     }
 
+    public Autor getAutor() {
+        return autor;
+    }
 
-
-    public Livro (Autor autor) {
+    public void setAutor(Autor autor) {
         this.autor = autor;
-        this.isbn ="000-00-00000-00-0";
-        this.impresso = true;
     }
 
-
-    void mostrarDetalhes() {
-        System.out.println("Mostrando detalhes do livro ");
-        System.out.println("Nome: " + nome );
-        System.out.println("Descrição: " + descricao);
-        System.out.println("Valor " + valor);
-        System.out.println("ISBN: " + isbn);
-        System.out.println("--");
+    public String getWaterMark() {
+        return waterMark;
     }
 
+    public void setWaterMark(String waterMark) {
+        this.waterMark = waterMark;
+    }
 
-
+    @Override
     public boolean aplicaDescontoDe(double porcentagem) {
-        if(porcentagem >0.3){
+        if (porcentagem > 0.15) {
             return false;
-
         }
 
-        this.valor -= this.valor *porcentagem;
+        double desconto = this.getValor() * porcentagem;
+        this.setValor(this.getValor() - desconto);
         return true;
-
-
     }
 }
